@@ -69,6 +69,19 @@ async function run() {
       res.send(result);
     })
 
+    app.patch('/addToy/:id', async(req,res) => {
+         
+         const id = req.params.id;
+         const filter = {_id: new ObjectId(id)}
+         const updateToy = req.body;
+         console.log(updateToy);
+         const updateDoc = {
+           $set: {
+              status:updateToy.status
+           },
+         }
+    })
+
     // all Toys
     app.get('/addToy', async(req,res) =>{
       const cursor = addToyCollection.find();
@@ -83,6 +96,16 @@ async function run() {
         projection: {tName: 1,sName:1, email:1,rating:1,quantity:1,detail:1, price: 1, toyPhoto: 1},
       };
       const result = await addToyCollection.findOne(query, options);
+      res.send(result);
+    })
+
+    // Delete Operation
+
+    app.delete('/addToy/:id', async(req,res) => {
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      
+      const result = await addToyCollection.deleteOne(query);
       res.send(result);
     })
 
