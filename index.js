@@ -48,6 +48,12 @@ async function run() {
 
 
     // Add Toy
+
+    app.get('/addToy', async(req,res) =>{
+      const result = await addToyCollection.find().toArray();
+      res.send(result);
+    })
+
     app.post('/addToy', async(req,res) => {
       const addToy = req.body;
       console.log(addToy);
