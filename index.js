@@ -69,6 +69,23 @@ async function run() {
       res.send(result);
     })
 
+    // all Toys
+    app.get('/addToy', async(req,res) =>{
+      const cursor = addToyCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+  })
+
+    app.get('/addToy/:id', async(req, res) => {
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const options = {
+        projection: {tName: 1,sName:1, email:1,rating:1,quantity:1,detail:1, price: 1, toyPhoto: 1},
+      };
+      const result = await addToyCollection.findOne(query, options);
+      res.send(result);
+    })
+
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
