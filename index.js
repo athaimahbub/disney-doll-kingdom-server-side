@@ -54,8 +54,10 @@ async function run() {
       let query = {};
       if(req.query ?.email){
         query = {email: req.query.email}
+        console.log(query);
+
       }
-      const result = await addToyCollection.find().toArray();
+      const result = await addToyCollection.find(query).toArray();
       res.send(result);
     })
 
