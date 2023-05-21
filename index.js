@@ -26,6 +26,8 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
+    
+    //  client.connect();
 
     const dollCollection = client.db('dollDB').collection('doll');
     const addToyCollection = client.db('dollDB').collection('addToy');
@@ -80,6 +82,8 @@ async function run() {
               status:updateToy.status
            },
          }
+         const result =await addToyCollection.updateOne(filter,updateDoc);
+         res.send(result);
     })
 
     // all Toys
